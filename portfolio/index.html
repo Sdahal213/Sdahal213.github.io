@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sameep portfoliio</title>
+	<style type="text/css">
+		.container{
+			text-align: center;
+		}
+
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div id="loading">
+		loading...
+	</div>
+	<div id="main" hidden="">
+		<img 
+		
+		height="100"
+		width="100"
+		id="image">
+
+		<h2 id="name"></h2>
+		<p id="bio"></p>
+		<h5 id="followers"></h5>
+		<p>
+			Find me on github <a id="githublink">Github</a>
+		</p>
+		<a class="twitter-timeline" data-width="300" data-height="400" href="https://twitter.com/sameepdahal45?ref_src=twsrc%5Etfw">Tweets by sameepdahal45</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+	</div>
+
+	</div>
+	
+	<script>
+		fetch("https://api.github.com/users/sdahal213")
+		.then(response => response.json())
+		.then(function(data){
+			console.log(data)
+
+			let followersCount=data['followers']
+			let followersInfo='I have been followed by '+ followersCount + ' people'
+			
+			document.getElementById('image').src=data['avatar_url']
+			document.getElementById('name').textContent=data['login']
+			document.getElementById('bio').textContent=data['bio']
+			document.getElementById("followers").textContent=followersInfo
+			document.getElementById("githublink").href=data['html_url']
+			document.getElementById('main').hidden=false;
+			document.getElementById('loading').hidden=true;
+
+		})
+
+	</script>
+	
+
+</body>
+</html>
